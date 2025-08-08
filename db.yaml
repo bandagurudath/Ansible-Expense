@@ -32,8 +32,8 @@
       login_password: "{{mysql_root_password}}"
       loginhost: "{{db.gurudathbn.site}}"
       filter: version
-      register: mysql_connection_output
-      ignore_errors: yes
+    register: mysql_connection_output
+    ignore_errors: yes
 
   - name: print mysql_connection_output
     ansible.builtin.debug:
