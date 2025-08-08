@@ -17,7 +17,7 @@
 
   - name: delete default html folder
     ansible.builtin.file:
-      path: /usr/share/nginx/html/*
+      path: /usr/share/nginx/html
       state: absent
 
   - name: download and unarchive frontend files
