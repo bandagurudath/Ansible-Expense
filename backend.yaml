@@ -17,11 +17,11 @@
   - name: Install nodejs
     ansible.builtin.dnf:
       name: "{{item}}"
-      loop:
+      state: installed
+    loop:
       - nodejs
       - mysql
-      state: installed
-
+      
   - name: Check expense user
     ansible.builtin.command: "id expense"
     register: id_expense_output
