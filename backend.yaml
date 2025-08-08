@@ -21,7 +21,7 @@
     loop:
       - nodejs
       - mysql
-      
+
   - name: Check expense user
     ansible.builtin.command: "id expense"
     register: id_expense_output
@@ -61,7 +61,7 @@
       name:
       - pymysql
       - cryptography
-      executables: 3.9
+      executable: pip3.9
 
   - name: Load data to db
     community.mysql.mysql_db:
