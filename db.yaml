@@ -1,0 +1,46 @@
+- name: Configure db
+  hosts: db
+  becomne: yes
+  vars_prompt:
+  - name: mysql_root_password
+    prompt: Enter mysql_root_password
+    private: no
+  vars:
+  - DB_HOST: db.gurudathbn.site
+  tasks:
+  - name: Install mysql-server
+    ansible.builtin.dnf:
+      name: mysql-server
+      state: installed
+
+  - name: Start mysqld service and enable
+    ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
+
+  - name: install pymysql and dependencies
+    ansible.builtin.pip:
+      name: "{{item}}"
+    executable: pip3.9
+    loop:
+    - pymysql
+    - cryptography
+
+  - name: Check if root password is setup or not
+    community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{mysql_root_password}}"
+      login_host: "{{DB_HOST}}"
+      filter: 
+      - version
+      ignore_errors: yes
+      register: mysql_connection_output
+
+  - name: print the mysql_connection_output
+    ansible.builtin.debug:
+      msg: "{{mysql_connection_output}}"
+
+  - name: Set mysql_root_password
+    ansible.builtin.command: mysql_secure_installation --set-root-pass "{{mysql_root_password}}"
+    when: mysql_connection_output.failed is true
