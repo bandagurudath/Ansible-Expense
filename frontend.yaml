@@ -25,7 +25,7 @@
 
   - name: copy frontend conf file to etc
     ansible.builtin.copy:
-      src: /home/ec2-user/ansible-expense/expense.conf
+      src: /home/ec2-user/Ansible-Expense/expense.conf
       dest: /etc/nginx/default.d/expense.conf
 
   - name: start nginx and enable

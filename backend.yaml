@@ -55,7 +55,7 @@
 
   - name: copy backend service file to systemd
     ansible.builtin.copy:
-      src: /home/ec2-user/ansible-expense/backend.service
+      src: /home/ec2-user/Ansible-Expense/backend.service
       dest: /etc/systemd/system/backend.service
 
   - name: daemon reload
