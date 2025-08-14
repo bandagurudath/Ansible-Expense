@@ -1,6 +1,6 @@
 - name: Configure db
   hosts: db
-  becomne: yes
+  become: yes
   vars_prompt:
   - name: mysql_root_password
     prompt: Enter mysql_root_password
